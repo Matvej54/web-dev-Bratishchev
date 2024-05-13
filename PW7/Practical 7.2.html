@@ -3,33 +3,22 @@
 <head> 
     <meta charset="UTF-8"> 
     <title>practical7.2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <style>
-        .slider {
-            width: 100%;
-            overflow: hidden;
+        owl-carousel {
+            margin-top: 20px;
+        }
+        
+        .owl-item {
+            padding: 20px;
         }
         
         .slide {
-            display: none;
-            padding: 20px;
             background-color: #f0f0f0;
-        }
-        
-        .slide.active {
-            display: block;
-        }
-        
-        .navigation {
+            padding: 20px;
+            border-radius: 5px;
             text-align: center;
-        }
-        
-        .navigation button {
-            margin: 5px;
-            padding: 8px 16px;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            cursor: pointer;
         }
     </style> 
 </head> 
@@ -66,7 +55,6 @@
                     return "Error: Invalid operator."; 
             } 
         } 
-
         function performCalculation() { 
             var num1 = parseFloat(document.getElementById('num1').value); 
             var operator = document.getElementById('operator').value; 
@@ -75,8 +63,8 @@
             document.getElementById('result').innerText = "The result is: " + result; 
         } 
     </script>
-    <div class="slider">
-        <div class="slide active">
+    <div class="owl-carousel">
+        <div class="slide">
             <h2>Explain “repaint” and “reflow” of the webpage.</h2>
             <p>Reflow refers to the process of recalculating the layout of elements on a webpage, which can occur due to changes in content, styles, or layout properties. It involves determining the size and position of each element relative to other elements on the page. Reflow is necessary whenever there are changes that affect the layout, such as adding, removing, or modifying elements, changing the dimensions of elements, or adjusting CSS styles.
 
@@ -106,30 +94,27 @@
             </ul>
         </div>
     </div>
-    <div class="navigation">
-        <button onclick="prevSlide()">Previous</button>
-        <button onclick="nextSlide()">Next</button>
-    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                if (i === index) {
-                    slide.classList.add('active');
-                } else {
-                    slide.classList.remove('active');
+        $(document).ready(function(){
+            $('.owl-carousel').owlCarousel({
+                loop:true,
+                margin:10,
+                nav:true,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    600:{
+                        items:3
+                    },
+                    1000:{
+                        items:5
+                    }
                 }
             });
-        }
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            showSlide(currentSlide);
-        }
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
-        }
-    </script>     
+        });
+    </script>    
 </body> 
 </html>
